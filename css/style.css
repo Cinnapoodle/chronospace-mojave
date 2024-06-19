@@ -56,6 +56,7 @@ ul{text-align:left;list-style:none;}
 	border-top-right-radius:4px;
 	flex-direction:column;
 	background:#f0f0f0c0;
+	box-shadow:4px 4px 2px #0128;
 	backdrop-filter:blur(2px);
 }
 .window-header{
@@ -100,9 +101,26 @@ ul{text-align:left;list-style:none;}
 	color:#f0f0f0;
 }.caption-buttons .minimize{margin:0;}
 .caption-buttons .close{background:linear-gradient(135deg,#a00,#100);}
+.browser-bar{
+	display:flex;
+	height:20px;
+	padding:2px;
+	background:#002244c8;
+	backdrop-filter:blur(2px);
+}
+.left-buttons,.right-buttons{width:48px;}
+#addressBar{
+	width:calc(100% - 48px);
+	height:100%;
+	border:0;
+	border-radius:0;
+	background:#024;
+	color:#f0f0f0;
+}
+
 .window-content{
 	height:100%;
-	border:2px inset grey;
+	border:1px solid #001122c8;
 	overflow-y:auto;
 }.window-content.hidden{display:none;}
 #document{
