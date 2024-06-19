@@ -1,17 +1,43 @@
 body{
 	display:flex;
-	height:calc(100vh - 96px);
+	height:100vh;
 	font-family:Tahoma,sans-serif;
 	font-size:11px;
 	text-align:center;
 	margin:0;
 	justify-content:center;
+	flex-direction:column;
 	background-image:url(../img/wallpaper.png);
 	background-color:#000;
 	background-size:cover;
 	color:#020202;
 }
 ::selection{background:#048;color:#f0f0f0;}
+.monitor-overlay{
+	position:fixed;
+	top:0;
+	left:0;
+	width:calc(100vw - 24px);
+	height:calc(100vh - 48px);
+	border:12px solid;
+	border-color:#191919 #080808 #080808 #191919;
+	background-image:linear-gradient(#19191925,#0000),url(../img/wallpaper.png);
+	background-size:100vw 100vh;
+}.monitor-overlay::after{
+	content:'LG';
+	display:block;
+	position:fixed;
+	left:0;
+	bottom:0;
+	width:100vw;
+	height:24px;
+	font-family:Helvetica,Helvetica Neue,Neue Haas Grotesk Text Pro,Neue Haas Grotesk Display Pro,Arial,sans-serif; /* anything but arial */
+	font-size:20px;
+	font-weight:900;
+	background:#191919;
+	color:#f0f0f0;
+}
+
 h1{
 	margin:8px;
 	color:orange;
@@ -41,17 +67,24 @@ ul{text-align:left;list-style:none;}
 	text-align:left;
 	padding:4px;
 	justify-content:space-between;
+	overflow:hidden;
 	background:linear-gradient(#004488c8,#002244c8);
 	color:#f0f0f0;
 	text-shadow:0 -2px #001222a0;
 }
-.title{width:95%;}
 .icon{
 	width:20px;
 	height:20px;
 	flex-shrink:0;
 	margin-right:4px;
 	background:#000;
+}
+#title{
+	width:95%;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	flex-shrink:1;
 }
 .caption-buttons{display:flex;flex-shrink:0;}
 .caption-buttons button{
@@ -60,27 +93,34 @@ ul{text-align:left;list-style:none;}
 	margin-left:2px;
 	border:1px solid #001222;
 	border-radius:3px;
+	font-weight:900;
+	flex-shrink:0;
 	background:linear-gradient(135deg,#059,#012);
 	box-shadow:inset 1px 1px 2px #f0f0f080,inset -1px -1px 2px #00122280;
-}.caption-buttons button:nth-of-type(1){margin:0;}
+	color:#f0f0f0;
+}.caption-buttons .minimize{margin:0;}
+.caption-buttons .close{background:linear-gradient(135deg,#a00,#100);}
 .window-content{
 	height:100%;
 	border:2px inset grey;
 	overflow-y:auto;
-}
+}.window-content.hidden{display:none;}
+#document{
+	height:100%;
+	border:0;
+	display:none;
+}#document.shown{display:block;}
 
 .tasquebar{
 	display:flex;
-	position:fixed;
-	width:calc(100vw - 24px);
+	width:100%;
 	height:30px;
-	bottom:68px;
 	justify-content:space-between;
 	background:#373737c8;
 	box-shadow:inset 0 6px 4px -4px #686868,inset 0 -6px 4px -4px #1c1c1c;
 	backdrop-filter:blur(4px);
 }
-button.think{
+button#think{
 	font-family:Tahoma,sans-serif;
 	font-size:16px;
 	font-weight:bold;
@@ -94,7 +134,7 @@ button.think{
 	box-shadow:inset 0 6px 4px -4px #0080ff,inset 0 -6px 4px -4px #024;
 	color:#f0f0f0;
 	cursor:pointer;
-}button.think::before{
+}button#think::before{
 	content:'';
 	display:block;
 	position:fixed;
@@ -105,9 +145,9 @@ button.think{
 	border-radius:100%;
 	background:url(../img/thoughtviewer.svg) #012;
 	background-size:contain;
-}button.think::after{left:89.5px;}
-button.think:hover{background:#005599c0;}
-button.think:active{background:#003366c0;box-shadow:inset 0 6px 4px -4px #0080ff,inset 0 -6px 4px -4px #012;}
+}button#think::after{left:89.5px;}
+button#think:hover{background:#005599c0;}
+button#think:active{background:#003366c0;box-shadow:inset 0 6px 4px -4px #0080ff,inset 0 -6px 4px -4px #012;}
 
 .tasks{
 	display:flex;
@@ -139,7 +179,7 @@ button.think:active{background:#003366c0;box-shadow:inset 0 6px 4px -4px #0080ff
 	text-shadow:0 -1px #282828;
 }#time{margin:auto;}
 
-button.think::after,.time-container::before{
+button#think::after,.time-container::before{
 	content:'';
 	position:fixed;
 	bottom:0;
@@ -148,36 +188,8 @@ button.think::after,.time-container::before{
 	background:linear-gradient(90deg,#1e1e1ec8 49.5%,#696969c8 50.5%);
 }
 
-.monitor-overlay{
-	position:fixed;
-	top:0;
-	left:0;
-	width:calc(100vw - 24px);
-	height:calc(100vh - 80px);
-	border:12px solid;
-	border-color:#191919 #080808 #080808 #191919;
-	background-image:linear-gradient(#19191925,#0000),url(../img/wallpaper.png);
-	background-size:100vw 100vh;
-	z-index:1;
-}.monitor-overlay::after{
-	content:'LG';
-	display:block;
-	position:fixed;
-	bottom:32px;
-	left:0;
-	width:100vw;
-	height:24px;
-	font-family:Helvetica,Neue Haas Grotesk Text Pro,Neue Haas Grotesk Display Pro,Arial,sans-serif; /* anything but arial */
-	font-size:20px;
-	font-weight:900;
-	background:#191919;
-	color:#f0f0f0;
-}
 footer{
 	display:flex;
-	position:fixed;
-	left:0;
-	bottom:0;
 	width:100%;
 	height:32px;
 	font-size:14px;
