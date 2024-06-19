@@ -4,7 +4,14 @@
 	<meta charset=UTF-8>
 	<meta name=viewport content="width=device-width,initial-scale=1.0">
 	<link rel=stylesheet href=css/style.css>
-	</head><body class=monitor-overlay>
+	<audio id="click">
+		<source src="/res/click.mp3" type="audio/mpeg">
+	  </audio>
+	  <audio id="ding">
+		<source src="/res/ding.mp3" type="audio/mpeg">
+	  </audio>
+	</head>
+	<body class=monitor-overlay>
 	<main class=window>
 		<div class=window-header aria-hidden=true>
 			<span class=icon></span>
@@ -31,11 +38,12 @@
 		</section>
 	</main>
 	<section class=tasquebar aria-hidden=true>
-		<button class=think>think</button>
+		<button class=think id="startbtn">think</button>
 		<div class=tasks><button class=task>Mojave! Master Browser</button></div>
-		<div class=time-container><span id=time>time o' clock</span></div>
+		<div class=time-container><span id=time>--:-- --</span></div>
 	</section>
-	<footer><p>Chronospace Mojave! written by <a href=https://linktr.ee/luminousmacintosh>Becky Wilder</a>, site maintained by <a href=https://github.com/SKCro>SKCro</a></p></footer>
+	<footer><p>Chronospace Mojave! written by <a href=https://linktr.ee/luminousmacintosh target="_blank">Becky Wilder</a>, site designed by <a href=https://github.com/SKCro target="_blank">SKCro</a>, backend services maintained by <a href="https://brew.rocks" target="_blank">brew</a></p></footer>
 	<script src=js/time.js></script>
+	<script src=js/interact.js></script>
 	<script src=https://skcro.destroytheos.net/js/wtv-hd.js></script>
 </body></html>
