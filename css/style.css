@@ -11,6 +11,18 @@ body{
 	background-color:#000;
 	background-size:cover;
 	color:#020202;
+}body::before{/* Overlays */
+	content:'';
+	display:block;
+	position:fixed;
+	top:0;
+	left:0;
+	transition:opacity 1s;
+	width:100vw;
+	height:100vh;
+	pointer-events:none;
+	opacity:0;
+	z-index:9999;
 }
 ::selection{background:#048;color:#f0f0f0;}
 .monitor-overlay{
@@ -36,6 +48,12 @@ body{
 	font-weight:900;
 	background:#191919;
 	color:#f0f0f0;
+	z-index:-1;
+}
+.vignette{background-image:radial-gradient(#0000,#000),url(../img/wallpaper.png);}
+.vignette::before{
+	opacity:1;
+	background:radial-gradient(#0000 75%,#000);
 }
 
 h1{
@@ -96,11 +114,16 @@ ul{text-align:left;list-style:none;}
 	border-radius:3px;
 	font-weight:900;
 	flex-shrink:0;
-	background:linear-gradient(135deg,#059,#012);
+	background:linear-gradient(135deg,#05a,#012);
 	box-shadow:inset 1px 1px 2px #f0f0f080,inset -1px -1px 2px #00122280;
 	color:#f0f0f0;
 }.caption-buttons .minimize{margin:0;}
 .caption-buttons .close{background:linear-gradient(135deg,#a00,#100);}
+.caption-buttons button:hover{background:linear-gradient(135deg,#05a,#024);}
+.caption-buttons .close:hover{background:linear-gradient(135deg,#c00,#300);}
+.caption-buttons button:active{background:linear-gradient(135deg,#048,#001222);}
+.caption-buttons .close:active{background:linear-gradient(135deg,#900,#200000);}
+
 .browser-bar{
 	display:flex;
 	height:20px;
@@ -162,7 +185,7 @@ button#think{
 	background:url(../img/thoughtviewer.svg) #012;
 	background-size:contain;
 }button#think::after{left:89.5px;}
-button#think:hover{background:#005599c0;}
+button#think:hover{background:#0055aac0;}
 button#think:active{background:#003366c0;box-shadow:inset 0 6px 4px -4px #0080ff,inset 0 -6px 4px -4px #012;}
 
 .tasks{
