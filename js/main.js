@@ -59,10 +59,12 @@ function showIframe(e){
 function hideIframe(){
 	windowContents.classList.remove('hidden');
 	iframe.classList.remove('shown');
+	document.title=docName[0];
+	addressBar.value='https://chronosoft.day/';
 	windowTitle.textContent=browserTitle+docName[0];
 }
 document.querySelectorAll('.window-content a').forEach(function(e){e.addEventListener('click',showIframe)});
-window.addEventListener('popstate',function(){hideIframe();});
+addEventListener('popstate',function(ev){console.log(ev);hideIframe();});
 
 //Monitor overlay toggle
 function toggleOverlay(){
@@ -70,3 +72,10 @@ function toggleOverlay(){
 	if(bodyClasses.contains('monitor-overlay')){bodyClasses.remove('monitor-overlay');}else{bodyClasses.add('monitor-overlay');}
 }
 document.getElementById('think').addEventListener('click',toggleOverlay);
+
+//Sounds
+const audioPath='audio/';
+const click=new Audio(audioPath+'click.mp3');
+const ding=new Audio(audioPath+'ding.mp3');
+addEventListener('click',function(){click.play();});
+document.getElementById('think').addEventListener('click',function(){ding.play();});
