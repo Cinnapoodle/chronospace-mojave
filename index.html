@@ -16,9 +16,17 @@
 			</span>
 		</div>
 		<div class=browser-bar>
-			<div class=left-buttons></div>
+			<div class=left-buttons>
+				<button id=back onclick=history.back()></button>
+				<button id=forward onclick=history.forward()></button>
+				<button id=reload onclick=reload()></button>
+			</div>
 			<input id=addressBar value=https://chronosoft.day/ readonly>
-			<div class=right-buttons></div>
+			<div class=right-buttons>
+				<button id=home onclick=hideIframe()></button>
+				<button id=favorites></button>
+				<button id=settings></button>
+			</div>
 		</div>
 		<section class=window-content>
 			<h1>CHRONOSPACE MOJAVE!</h1>
@@ -45,7 +53,7 @@
 		<footer><p>Chronospace Mojave! written by <a href=https://linktr.ee/luminousmacintosh>Becky Wilder</a>, site written and maintained by <a href=https://github.com/SKCro>SKCro</a> and <a href=https://brew.rocks>brew</a></p></footer>
 	</main>
 	<section class=tasquebar aria-hidden=true>
-		<button id=think title="Click to toggle overlays">think</button>
+		<button id=think title="Click to toggle overlays" onclick=toggleOverlay()>think</button>
 		<div class=tasks><button class=task>Mojave! Master Browser</button></div>
 		<div class=time-container><span id=time>time o' clock</span></div>
 	</section>

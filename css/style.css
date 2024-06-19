@@ -126,21 +126,47 @@ ul{text-align:left;list-style:none;}
 
 .browser-bar{
 	display:flex;
-	height:20px;
+	height:24px;
 	padding:2px;
 	background:#002244c8;
 	backdrop-filter:blur(2px);
 }
-.left-buttons,.right-buttons{width:48px;}
+.left-buttons,.right-buttons{
+	display:flex;
+	width:56px;
+	padding:0 4px;
+	justify-content:space-between;
+}
+.browser-bar button{
+	width:16px;
+	height:16px;
+	margin-right:2px;
+	border:0;
+}
+#back,#forward{
+	background:url(../img/arrowSheet.svg);
+	background-size:cover;
+	background-repeat:no-repeat;
+}
+#back{background-position-y:-16px;}
+#forward{background-position-y:0;}
+#back:hover{background-position-y:-48px;}
+#forward:hover{background-position-y:-32px;}
+#back:active{background-position-y:-80px;}
+#forward:active{background-position-y:-64px;}
+#reload{background:url(../img/reloadSheet.svg);background-size:cover;margin:0;}
+#reload:hover{background-position-y:-16px;}
+#reload:active{background-position-y:-32px;}
 #addressBar{
 	width:calc(100% - 96px);
-	height:calc(100% - 4px);
+	height:16px;
 	border:1px inset #024;
-	border-radius:0;
+	border-radius:2px;
 	padding:1px 4px;
-	background:#0000;
+	background:#00122280;
 	color:#f0f0f0;
-}
+	text-shadow:0 -1px #000810;
+}#addressBar:focus-visible{outline:none;}
 
 .window-content,#document,footer{
 	height:100%;
