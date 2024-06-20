@@ -10,24 +10,24 @@
 			<span class=icon></span>
 			<span id=title>Mojave! Master Browser - Chronospace Mojave!</span>
 			<span class=caption-buttons>
-				<button class=minimize>_</button>
-				<button class=maximize>□</button>
-				<button class=close>⛌</button>
+				<button class=minimize></button>
+				<button class=maximize></button>
+				<button class=close></button>
 			</span>
 		</div>
-		<div class=browser-bar>
-			<div class=left-buttons>
+		<nav class=browser-bar aria-hidden=true>
+			<section class=left-buttons>
 				<button id=back onclick=history.back()></button>
-				<button id=forward onclick=history.forward()></button>
+				<button id=forward onclick=forward()></button>
 				<button id=reload onclick=reload()></button>
-			</div>
-			<input id=addressBar value=https://chronosoft.day/ readonly>
-			<div class=right-buttons>
+			</section>
+			<input id=addressBar value=https://chronosoft.day/ autocomplete=off readonly>
+			<section class=right-buttons>
 				<button id=home onclick=hideIframe()></button>
 				<button id=favorites></button>
 				<button id=settings></button>
-			</div>
-		</div>
+			</section>
+		</nav>
 		<section class=window-content>
 			<h1>CHRONOSPACE MOJAVE!</h1>
 			<p>Hello! Assuming you're not here looking for government secrets, you're likely here because you know that the Internet is a bit...weird. It feels corrupt, almost as if something is going on behind the curtains...<br> My name is Jöel Kinnunen, and I'm on a journey to find out what the big deal is. Everytime I connect to Mojave!, I write about my experiences inside it, all of the goods, all of the bads, and certainly all of the uglies.<br>If you can stomach it, you can accompany me on my journey by reading it below.</p>
@@ -52,11 +52,11 @@
 		<iframe name=document id=document sandbox=allow-scripts>Why doesn't your browser support iframes yet? In the weird case that it doesn't support iframes yet can go to Google Docs, open the links in a new tab instead.</iframe>
 		<footer><p>Chronospace Mojave! written by <a href=https://linktr.ee/luminousmacintosh>Becky Wilder</a>, site written and maintained by <a href=https://github.com/SKCro>SKCro</a> and <a href=https://brew.rocks>brew</a></p></footer>
 	</main>
-	<section class=tasquebar aria-hidden=true>
+	<nav class=tasquebar aria-hidden=true>
 		<button id=think title="Click to toggle overlays" onclick=toggleOverlay()>think</button>
 		<div class=tasks><button class=task>Mojave! Master Browser</button></div>
-		<div class=time-container><span id=time>time o' clock</span></div>
-	</section>
+		<div class=time-container><span id=time>--:-- --</span></div>
+	</nav>
 	<script src=js/main.js></script>
 	<script src=https://skcro.destroytheos.net/js/wtv-hd.js></script>
 </body></html>

@@ -1,15 +1,13 @@
 'use strict';
 //this shit was pulled directly from WTV-HD with like 2 changes lmfao
-function updateClock(){
-	var now=new Date();
-	var hours=now.getHours();
-	var minutes=now.getMinutes();
-	var seconds=now.getSeconds();
-	var amPm=hours>=12?'PM':'AM';
-	var formattedHours=hours%12||12;
-	var timeString=`${formattedHours}:${minutes<10?'0':''}${minutes} ${amPm}`;
-	document.getElementById('time').textContent=timeString;
-}
+const now=new Date();
+const hours=now.getHours();
+const minutes=now.getMinutes();
+const seconds=now.getSeconds();
+const amPm=hours>=12?'PM':'AM';
+const formattedHours=hours%12||12;
+const timeString=`${formattedHours}:${minutes<10?'0':''}${minutes} ${amPm}`;
+function updateClock(){document.getElementById('time').textContent=timeString;}
 setInterval(updateClock,1000);
 updateClock();
 
@@ -20,6 +18,7 @@ const addressBar=document.getElementById('addressBar');
 const windowContents=document.querySelector('.window-content');
 const iframe=document.getElementById('document');
 const docName=['Chronospace Mojave!','INITIAL BOOT SEQUENCE','EPISODE ONE: THIS INSTALL IS TAKING FOREVER','EPISODE TWO: WELCOME TO THE INTERNET','EPISODE THREE, PART 1: EVERYTHINGSFINE.TXT','EPISODE THREE, PART 2: WIN32K_CRITICAL_FAILURE','EPISODE FOUR: NO MAIN SYSTEM POWER'];
+if(location.hash!==''){history.replaceState({},'',`https://chronosoft.day/`);}
 function showIframe(e){
 	e.preventDefault();
 	history.pushState({},'',`#${e.target.id}`);
@@ -66,6 +65,8 @@ function hideIframe(){
 }
 document.querySelectorAll('.window-content a').forEach(function(e){e.addEventListener('click',showIframe)});
 addEventListener('popstate',function(){hideIframe();});
+
+function forward(){history.forward();}
 
 //Monitor overlay toggle
 function toggleOverlay(){
