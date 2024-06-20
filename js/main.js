@@ -1,14 +1,17 @@
 'use strict';
 //this shit was pulled directly from WTV-HD with like 2 changes lmfao
-const now=new Date();
-const hours=now.getHours();
-const minutes=now.getMinutes();
-const seconds=now.getSeconds();
-const amPm=hours>=12?'PM':'AM';
-const formattedHours=hours%12||12;
-const timeString=`${formattedHours}:${minutes<10?'0':''}${minutes} ${amPm}`;
-function updateClock(){document.getElementById('time').textContent=timeString;}
-setInterval(updateClock,1000);
+function updateClock(){
+	const now=new Date();
+	const hours=now.getHours();
+	const minutes=now.getMinutes();
+	const seconds=now.getSeconds();
+	const amPm=hours>=12?'PM':'AM';
+	const formattedHours=hours%12||12;
+	const timeString=`${formattedHours}:${minutes<10?'0':''}${minutes} ${amPm}`;
+	const clock=document.getElementById('clock');
+	if(clock.textContent!==timeString){clock.textContent=timeString;}
+}
+setInterval(updateClock,500);
 updateClock();
 
 //Document stuff
@@ -74,7 +77,12 @@ function toggleOverlay(){
 	if(bodyClasses.contains('monitor-overlay')){bodyClasses.remove('monitor-overlay');}else{bodyClasses.add('monitor-overlay');}
 }
 
-//Top bar button stuff
+//Buttons
+function maximize(){
+	const mainWindow=document.querySelector('.window');
+	if(mainWindow.classList.contains('maximized')){mainWindow.classList.remove('maximized')}else{mainWindow.classList.add('maximized');}
+}
+
 function reload(){
 	if(windowContents.classList.contains('hidden')){
 		//hacky way to "reload" the page
