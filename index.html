@@ -2,17 +2,31 @@
 <html><head>
 	<title>Chronospace Mojave!</title>
 	<meta charset=UTF-8>
-	<meta name=viewport content="width=device-width,initial-scale=1.0">
+	<meta name=author content="Becky Wilder, SKCro, and brew">
+	<meta property=og:title content="Chronospace Mojave!">
+	<meta property=og:description content="Placeholder description">
+	<meta property=og:image content=https://chronosoft.day/img/mojave.png>
+	<meta property=og:url content=https://chronosoft.day/>
+	<meta name=twitter:title content="Chronospace Mojave!">
+	<meta name=twitter:card content=summary>
+	<meta name=twitter:description content="Placeholder description, but for twitter (wow!)">
+	<meta name=twitter:image content=https://chronosoft.day/img/mojave.png>
+	<meta name=twitter:site content=https://chronosoft.day/>
+	<meta name=viewport content=width=device-width,initial-scale=1.0>
 	<link rel=stylesheet href=css/style.css>
 	</head><body class=monitor-overlay>
+	<section class=desktop-icons>
+		<button class="desktop-icon mojave" ondblclick=openBrowser()>Mojave! Master Browser</button>
+		<!--<button class="desktop-icon media">Thoughtviewer Media Player</button>-->
+	</section>
 	<main class=window>
 		<div class=window-header aria-hidden=true>
 			<span class=icon></span>
 			<span id=title>Mojave! Master Browser - Chronospace Mojave!</span>
 			<span class=caption-buttons>
-				<button class=minimize></button>
+				<button class=minimize onclick=minimize()></button>
 				<button class=maximize onclick=maximize()></button>
-				<button class=close></button>
+				<button class=close onclick=exit()></button>
 			</span>
 		</div>
 		<nav class=browser-bar aria-hidden=true>
@@ -44,7 +58,7 @@
 			<noscript>
 				<hr><b>You have JavaScript disabled, meaning the document links above won't work when clicked.</b>
 				<h3>Why?</h3>
-				<p>This site is built in a way that listens for click events on those links, then shows the iframe containing them. This doesn't work without JavaScript, so you'll need to enable it to read the docs.</p>
+				<p>This site is built in a way that listens for click events on those links, then shows the iframe containing them. This doesn't work without JavaScript, so you'll need to enable it to read the docs inline.</p>
 				<h3>Can't I just open them in a new tab?</h3>
 				<p>Google Docs requires JavaScript to function, so if you've whitelisted them, yes.</p>
 			</noscript>
@@ -54,7 +68,7 @@
 	</main>
 	<nav class=tasquebar aria-hidden=true>
 		<button id=think title="Click to toggle overlays" onclick=toggleOverlay()>think</button>
-		<div class=tasks><button class=task>Mojave! Master Browser</button></div>
+		<div class=tasks><button class=task onclick=minimize()>Mojave! Master Browser</button></div>
 		<div class=clock-container><span id=clock title="yes this is a working clock lol">--:-- --</span></div>
 	</nav>
 	<script src=js/main.js></script>

@@ -1,26 +1,13 @@
 'use strict';
-//this shit was pulled directly from WTV-HD with like 2 changes lmfao
-function updateClock(){
-	const now=new Date();
-	const hours=now.getHours();
-	const minutes=now.getMinutes();
-	const seconds=now.getSeconds();
-	const amPm=hours>=12?'PM':'AM';
-	const formattedHours=hours%12||12;
-	const timeString=`${formattedHours}:${minutes<10?'0':''}${minutes} ${amPm}`;
-	const clock=document.getElementById('clock');
-	if(clock.textContent!==timeString){clock.textContent=timeString;}
-}
-setInterval(updateClock,500);
-updateClock();
-
 //Document stuff
+const mainWindow=document.querySelector('.window');
 const windowTitle=document.getElementById('title');
 const browserTitle='Mojave! Master Browser - ';
 const addressBar=document.getElementById('addressBar');
 const windowContents=document.querySelector('.window-content');
 const iframe=document.getElementById('document');
 const docName=['Chronospace Mojave!','INITIAL BOOT SEQUENCE','EPISODE ONE: THIS INSTALL IS TAKING FOREVER','EPISODE TWO: WELCOME TO THE INTERNET','EPISODE THREE, PART 1: EVERYTHINGSFINE.TXT','EPISODE THREE, PART 2: WIN32K_CRITICAL_FAILURE','EPISODE FOUR: NO MAIN SYSTEM POWER'];
+let lastDoc;
 if(location.hash!==''){history.replaceState({},'',`https://chronosoft.day/`);}
 function showIframe(e){
 	e.preventDefault();
@@ -29,6 +16,7 @@ function showIframe(e){
 	windowContents.classList.add('hidden');
 	iframe.classList.add('shown');
 	addressBar.value=e.target.href;
+	lastDoc=e.target.id;
 	const d=' - ';
 	switch(e.target.id){
 		case 'prologue':
@@ -68,8 +56,7 @@ function hideIframe(){
 }
 document.querySelectorAll('.window-content a').forEach(function(e){e.addEventListener('click',showIframe)});
 addEventListener('popstate',function(){hideIframe();});
-
-function forward(){history.forward();}
+function forward(){if(lastDoc){document.getElementById(lastDoc).click();}}
 
 //Monitor overlay toggle
 function toggleOverlay(){
@@ -78,9 +65,18 @@ function toggleOverlay(){
 }
 
 //Buttons
-function maximize(){
-	const mainWindow=document.querySelector('.window');
-	if(mainWindow.classList.contains('maximized')){mainWindow.classList.remove('maximized')}else{mainWindow.classList.add('maximized');}
+function openBrowser(){
+	if(mainWindow.classList.contains('hidden')){
+		mainWindow.classList.remove('hidden');
+		document.querySelector('.task').classList.remove('hidden');
+	}else{return;}
+}
+
+function minimize(){if(mainWindow.classList.contains('hidden')){mainWindow.classList.remove('hidden');}else{mainWindow.classList.add('hidden');}}
+function maximize(){if(mainWindow.classList.contains('maximized')){mainWindow.classList.remove('maximized');}else{mainWindow.classList.add('maximized');}}
+function exit(){
+	mainWindow.classList.add('hidden');
+	document.querySelector('.task').classList.add('hidden');
 }
 
 function reload(){
@@ -90,6 +86,21 @@ function reload(){
 		iframe.contentWindow.location.replace(addressBar.value);
 	}else{location.reload(1);}
 }
+
+//this shit was pulled directly from WTV-HD with like 2 changes lmfao
+function updateClock(){
+	const now=new Date();
+	const hours=now.getHours();
+	const minutes=now.getMinutes();
+	const seconds=now.getSeconds();
+	const amPm=hours>=12?'PM':'AM';
+	const formattedHours=hours%12||12;
+	const timeString=`${formattedHours}:${minutes<10?'0':''}${minutes} ${amPm}`;
+	const clock=document.getElementById('clock');
+	if(clock.textContent!==timeString){clock.textContent=timeString;}
+}
+setInterval(updateClock,500);
+updateClock();
 
 //Sounds
 const audioPath='audio/';
