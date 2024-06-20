@@ -72,7 +72,7 @@ function openBrowser(){
 	}else{return;}
 }
 
-function minimize(){if(mainWindow.classList.contains('hidden')){mainWindow.classList.remove('hidden');}else{mainWindow.classList.add('hidden');}}
+function minimize(){if(mainWindow.classList.contains('hidden')){mainWindow.classList.remove('hidden');restore.play()}else{mainWindow.classList.add('hidden');minim.play()};}
 function maximize(){if(mainWindow.classList.contains('maximized')){mainWindow.classList.remove('maximized');}else{mainWindow.classList.add('maximized');}}
 function exit(){
 	mainWindow.classList.add('hidden');
@@ -106,5 +106,7 @@ updateClock();
 const audioPath='audio/';
 const click=new Audio(audioPath+'click.mp3');
 const ding=new Audio(audioPath+'ding.mp3');
+const minim=new Audio(audioPath+'minimize.mp3');
+const restore=new Audio(audioPath+'maximize.mp3');
 addEventListener('click',function(){click.play();});
 document.getElementById('think').addEventListener('click',function(){ding.play();});
