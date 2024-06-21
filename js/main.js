@@ -8,7 +8,7 @@ const windowContents=document.querySelector('.window-content');
 const iframe=document.getElementById('document');
 const docName=['Chronospace Mojave!','INITIAL BOOT SEQUENCE','EPISODE ONE: THIS INSTALL IS TAKING FOREVER','EPISODE TWO: WELCOME TO THE INTERNET','EPISODE THREE, PART 1: EVERYTHINGSFINE.TXT','EPISODE THREE, PART 2: WIN32K_CRITICAL_FAILURE','EPISODE FOUR: NO MAIN SYSTEM POWER'];
 let lastDoc;
-if(location.hash!==''){history.replaceState({},'',`https://chronosoft.day/`);}
+try{if(location.hash!==''){history.replaceState({},'',`https://chronosoft.day/`);}}catch(error){}
 function showIframe(e){
 	e.preventDefault();
 	history.pushState({},'',`#${e.target.id}`);
@@ -34,19 +34,23 @@ function showIframe(e){
 		case 'ep3p1':
 			document.title=docName[0]+d+docName[4];
 			windowTitle.textContent=browserTitle+docName[4];
+			document.body.classList.add('vignette');
 		break;
 		case 'ep3p2':
 			document.title=docName[0]+d+docName[5];
 			windowTitle.textContent=browserTitle+docName[5];
+			document.body.classList.add('vignette');
 		break;
 		case 'ep4':
 			document.title=docName[0]+d+docName[6];
 			windowTitle.textContent=browserTitle+docName[6];
+			document.body.classList.add('vignette');
 		break;
 		default:windowTitle.textContent=browserTitle+docName[0];document.title=docName[0];
 	}
 }
 function hideIframe(){
+	document.body.classList.remove('vignette');
 	windowContents.classList.remove('hidden');
 	iframe.classList.remove('shown');
 	iframe.contentWindow.location.replace('about:blank');
@@ -67,12 +71,20 @@ function toggleOverlay(){
 //Buttons
 function openBrowser(){
 	if(mainWindow.classList.contains('hidden')){
-		mainWindow.classList.remove('hidden');
+		minimize();
 		document.querySelector('.task').classList.remove('hidden');
 	}else{return;}
 }
 
-function minimize(){if(mainWindow.classList.contains('hidden')){mainWindow.classList.remove('hidden');restore.play()}else{mainWindow.classList.add('hidden');minim.play()};}
+function minimize(){
+	if(mainWindow.classList.contains('hidden')){
+		mainWindow.classList.remove('hidden');
+		restore.play();
+	}else{
+		mainWindow.classList.add('hidden');
+		minim.play();
+	}
+}
 function maximize(){if(mainWindow.classList.contains('maximized')){mainWindow.classList.remove('maximized');}else{mainWindow.classList.add('maximized');}}
 function exit(){
 	mainWindow.classList.add('hidden');
