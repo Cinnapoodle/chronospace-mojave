@@ -9,3 +9,5 @@ Utilizing your extreme knack for technology and your advanced knowledge of Inter
 Will you purify the Internet? Or will you, quite literally, die trying?
 
 Always remember, Chronosoft welcomes you with open arms!
+
+Read now at [chronosoft.day](https://chronosoft.day)!
