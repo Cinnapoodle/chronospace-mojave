@@ -93,7 +93,7 @@ function exit(){
 
 function reload(){
 	if(windowContents.classList.contains('hidden')){
-		//hacky way to "reload" the page
+		//hacky way to "reload" the current doc
 		iframe.contentWindow.location.replace('about:blank');
 		iframe.contentWindow.location.replace(addressBar.value);
 	}else{location.reload(1);}
