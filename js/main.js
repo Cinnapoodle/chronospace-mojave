@@ -1,10 +1,12 @@
 'use strict';
 //Document stuff
-const mainWindow=document.querySelector('.window');
-const windowTitle=document.getElementById('title');
-const browserTitle='Mojave! Master Browser - ';
+const mainWindow=document.getElementById('mainWindow');
+const favsWindow=document.getElementById('favsWindow');
+const windowTitle=document.getElementById('mainTitle');
+const favsTitle=document.getElementById('favsTitle');
+const browserTitle=' - Mojave! Master Browser';
 const addressBar=document.getElementById('addressBar');
-const windowContents=document.querySelector('.window-content');
+const windowContents=document.querySelector('#mainWindow .window-content');
 const iframe=document.getElementById('document');
 const docName=['Chronospace Mojave!','INITIAL BOOT SEQUENCE','EPISODE ONE: THIS INSTALL IS TAKING FOREVER','EPISODE TWO: WELCOME TO THE INTERNET','EPISODE THREE, PART 1: EVERYTHINGSFINE.TXT','EPISODE THREE, PART 2: WIN32K_CRITICAL_FAILURE','EPISODE FOUR: NO MAIN SYSTEM POWER'];
 let lastDoc;
@@ -21,32 +23,32 @@ function showIframe(e){
 	switch(e.target.id){
 		case 'prologue':
 			document.title=docName[0]+d+docName[1];
-			windowTitle.textContent=browserTitle+docName[1];
+			windowTitle.textContent=docName[1]+browserTitle;
 		break;
 		case 'ep1':
 			document.title=docName[0]+d+docName[2];
-			windowTitle.textContent=browserTitle+docName[2];
+			windowTitle.textContent=docName[2]+browserTitle;
 		break;
 		case 'ep2':
 			document.title=docName[0]+d+docName[3];
-			windowTitle.textContent=browserTitle+docName[3];
+			windowTitle.textContent=docName[3]+browserTitle;
 		break;
 		case 'ep3p1':
 			document.title=docName[0]+d+docName[4];
-			windowTitle.textContent=browserTitle+docName[4];
+			windowTitle.textContent=docName[4]+browserTitle;
 			document.body.classList.add('vignette');
 		break;
 		case 'ep3p2':
 			document.title=docName[0]+d+docName[5];
-			windowTitle.textContent=browserTitle+docName[5];
+			windowTitle.textContent=docName[5]+browserTitle;
 			document.body.classList.add('vignette');
 		break;
 		case 'ep4':
 			document.title=docName[0]+d+docName[6];
-			windowTitle.textContent=browserTitle+docName[6];
+			windowTitle.textContent=docName[6]+browserTitle;
 			document.body.classList.add('vignette');
 		break;
-		default:windowTitle.textContent=browserTitle+docName[0];document.title=docName[0];
+		default:windowTitle.textContent=docName[0]+browserTitle;document.title=docName[0];
 	}
 }
 function hideIframe(){
@@ -56,9 +58,11 @@ function hideIframe(){
 	iframe.contentWindow.location.replace('about:blank');
 	document.title=docName[0];
 	addressBar.value='https://chronosoft.day/';
-	windowTitle.textContent=browserTitle+docName[0];
+	windowTitle.textContent=docName[0]+browserTitle;
 }
-document.querySelectorAll('.window-content a').forEach(function(e){e.addEventListener('click',showIframe)});
+function toggleFavs(){if(favsWindow.classList.contains('hidden')){openWindow(1);}else{exit(1);}}
+
+document.querySelectorAll('#mainWindow .window-content a').forEach(function(e){e.addEventListener('click',showIframe)});
 addEventListener('popstate',function(){hideIframe();});
 function forward(){if(lastDoc){document.getElementById(lastDoc).click();}}
 
@@ -69,26 +73,58 @@ function toggleOverlay(){
 }
 
 //Buttons
-function openBrowser(){
-	if(mainWindow.classList.contains('hidden')){
-		minimize();
-		document.querySelector('.task').classList.remove('hidden');
-	}else{return;}
-}
-
-function minimize(){
-	if(mainWindow.classList.contains('hidden')){
-		mainWindow.classList.remove('hidden');
-		restore.play();
-	}else{
-		mainWindow.classList.add('hidden');
-		minim.play();
+function openWindow(win){
+	function doOpen(winID){
+		if(winID.classList.contains('hidden')){
+			minimize(win);
+			document.querySelector('.'+winID.id).classList.remove('hidden');
+		}else{return;}
+	}
+	switch(win){
+		case 1:doOpen(favsWindow);break;
+		default:doOpen(mainWindow);
 	}
 }
-function maximize(){if(mainWindow.classList.contains('maximized')){mainWindow.classList.remove('maximized');}else{mainWindow.classList.add('maximized');}}
-function exit(){
-	mainWindow.classList.add('hidden');
-	document.querySelector('.task').classList.add('hidden');
+
+function minimize(win){
+	function doMinimize(winID){
+		if(winID.classList.contains('hidden')){
+			winID.classList.remove('hidden');
+			restore.play();
+		}else{
+			winID.classList.add('hidden');
+			minim.play();
+		}
+	}
+	switch(win){
+		case 1:doMinimize(favsWindow);break;
+		default:doMinimize(mainWindow);
+	}
+}
+function maximize(win){
+	function doMaximize(winID){
+		if(winID.classList.contains('maximized')){
+			winID.classList.remove('maximized');
+			event.target.title='Maximize';
+		}else{
+			winID.classList.add('maximized');
+			event.target.title='Restore Down';
+		}
+	}
+	switch(win){
+		case 1:doMaximize(favsWindow);break;
+		default:doMaximize(mainWindow);
+	}
+}
+function exit(win){
+	function doExit(winID){
+		winID.classList.add('hidden');
+		document.querySelector('.'+winID.id).classList.add('hidden');
+	}
+	switch(win){
+		case 1:doExit(favsWindow);break;
+		default:doExit(mainWindow);
+	}
 }
 
 function reload(){
