@@ -9,7 +9,7 @@ const addressBar=document.getElementById('addressBar');
 const windowContents=document.querySelector('#mainWindow .window-content');
 const iframe=document.getElementById('document');
 const docName=[
-	'Chronospace Mojave!',
+	'CHRONOSPACE MOJAVE!',
 	'INITIAL BOOT SEQUENCE',
 	'EPISODE ONE: THIS INSTALL IS TAKING FOREVER',
 	'EPISODE TWO: WELCOME TO THE INTERNET',
