@@ -8,7 +8,19 @@ const browserTitle=' - Mojave! Master Browser';
 const addressBar=document.getElementById('addressBar');
 const windowContents=document.querySelector('#mainWindow .window-content');
 const iframe=document.getElementById('document');
-const docName=['Chronospace Mojave!','INITIAL BOOT SEQUENCE','EPISODE ONE: THIS INSTALL IS TAKING FOREVER','EPISODE TWO: WELCOME TO THE INTERNET','EPISODE THREE, PART 1: EVERYTHINGSFINE.TXT','EPISODE THREE, PART 2: WIN32K_CRITICAL_FAILURE','EPISODE FOUR: NO MAIN SYSTEM POWER'];
+const docName=[
+	'Chronospace Mojave!',
+	'INITIAL BOOT SEQUENCE',
+	'EPISODE ONE: THIS INSTALL IS TAKING FOREVER',
+	'EPISODE TWO: WELCOME TO THE INTERNET',
+	'EPISODE THREE, PART 1: EVERYTHINGSFINE.TXT',
+	'EPISODE THREE, PART 2: WIN32K_CRITICAL_FAILURE',
+	'EPISODE FOUR: NO MAIN SYSTEM POWER',
+	`EPISODE FIVE: C:\CON\NUL\PRN`,
+	'EPISODE SIX: BAD COMMAND OR FILE NAME',
+	'EPISODE SEVEN: ABORT, RETRY, IGNORE, FAIL?'
+	'THE FINAL CUT'
+];
 let lastDoc;
 try{if(location.hash!==''){history.replaceState({},'',`https://chronosoft.day/`);}}catch(error){}
 function showIframe(e){
@@ -48,6 +60,26 @@ function showIframe(e){
 			windowTitle.textContent=docName[6]+browserTitle;
 			document.body.classList.add('vignette');
 		break;
+		case 'ep5':
+			document.title=docName[0]+d+docName[7];
+			windowTitle.textContent=docName[7]+browserTitle;
+			document.body.classList.add('vignette');
+		break;
+		case 'ep6':
+			document.title=docName[0]+d+docName[8];
+			windowTitle.textContent=docName[8]+browserTitle;
+			document.body.classList.add('vignette');
+		break;
+		case 'ep7':
+			document.title=docName[0]+d+docName[9];
+			windowTitle.textContent=docName[9]+browserTitle;
+			document.body.classList.add('vignette');
+		break;
+		case 'final':
+			document.title=docName[0]+d+docName[10];
+			windowTitle.textContent=docName[10]+browserTitle;
+			document.body.classList.add('vignette');
+		break;
 		default:windowTitle.textContent=docName[0]+browserTitle;document.title=docName[0];
 	}
 }
@@ -79,8 +111,7 @@ function openWindow(win){
 			minimize(win);
 			document.querySelector('.'+winID.id).classList.remove('hidden');
 		}else{return;}
-	}
-	switch(win){
+	}switch(win){
 		case 1:doOpen(favsWindow);break;
 		default:doOpen(mainWindow);
 	}
@@ -95,8 +126,7 @@ function minimize(win){
 			winID.classList.add('hidden');
 			minim.play();
 		}
-	}
-	switch(win){
+	}switch(win){
 		case 1:doMinimize(favsWindow);break;
 		default:doMinimize(mainWindow);
 	}
@@ -110,8 +140,7 @@ function maximize(win){
 			winID.classList.add('maximized');
 			event.target.title='Restore Down';
 		}
-	}
-	switch(win){
+	}switch(win){
 		case 1:doMaximize(favsWindow);break;
 		default:doMaximize(mainWindow);
 	}
@@ -120,8 +149,7 @@ function exit(win){
 	function doExit(winID){
 		winID.classList.add('hidden');
 		document.querySelector('.'+winID.id).classList.add('hidden');
-	}
-	switch(win){
+	}switch(win){
 		case 1:doExit(favsWindow);break;
 		default:doExit(mainWindow);
 	}
