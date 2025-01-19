@@ -69,11 +69,13 @@ function showIframe(e){
 			document.title=docName[0]+d+docName[8];
 			windowTitle.textContent=docName[8]+browserTitle;
 			document.body.classList.add('vignette');
+			document.body.classList.add('crack');
 		break;
 		case 'ep7':
 			document.title=docName[0]+d+docName[9];
 			windowTitle.textContent=docName[9]+browserTitle;
 			document.body.classList.add('vignette');
+			document.body.classList.add('crack');
 		break;
 		case 'final':
 			document.title=docName[0]+d+docName[10];
@@ -85,6 +87,7 @@ function showIframe(e){
 }
 function hideIframe(){
 	document.body.classList.remove('vignette');
+	document.body.classList.remove('crack');
 	windowContents.classList.remove('hidden');
 	iframe.classList.remove('shown');
 	iframe.contentWindow.location.replace('about:blank');
